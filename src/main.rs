@@ -21,13 +21,10 @@ fn main() {
         ])
         .unwrap();
     max30102.enable_fifo_rollover().unwrap();
-    let mut data = [0; 2];
-    max30102.clear_fifo().unwrap();
+    let mut data = [4; 100];
     let samples_read = max30102.read_fifo(&mut data).unwrap();
-    let temperature = max30102.read_temperature().unwrap();
 
     println!("Sample read: {:?}", samples_read);
-    println!("Temperature: {:?}", temperature);
     // get the I2C device back
     let i2c = max30102.destroy();
 }
