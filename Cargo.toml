@@ -7,5 +7,5 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-max3010x = "0.1"
+max3010x = {path = ./max3010x-rs} 
 rppal = {version = "0.11", features = ["hal-unproven"]}
