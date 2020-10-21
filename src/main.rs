@@ -10,6 +10,8 @@ fn main() {
     // i2c.set_slave_address(address).unwrap();
     let mut max30102 = Max3010x::new_max30102(i2c);
     let mut multi_led = max30102.into_multi_led().unwrap();
+    let sample_id = multi_led.get_part_id().unwrap();
+    println!("Sample ID: {:?}", sample_id);
     multi_led
         .set_sample_averaging(SampleAveraging::Sa4)
         .unwrap();
@@ -52,6 +54,7 @@ fn main() {
     spo2.set_pulse_amplitude(Led::All, 15).unwrap();
     spo2.set_sampling_rate(SamplingRate::Sps200).unwrap();
     spo2.set_pulse_width(LedPulseWidth::Pw411).unwrap();
+    spo2.wake_up().unwrap();
     spo2.enable_fifo_rollover().unwrap();
     samples_read = spo2.read_fifo(&mut data).unwrap();
     println!("SPo2 Sample read: {:?}", samples_read);
