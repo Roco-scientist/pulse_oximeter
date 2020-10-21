@@ -3,6 +3,7 @@ extern crate rppal;
 
 use max3010x::{Led, LedPulseWidth, Max3010x, SampleAveraging, SamplingRate, TimeSlot};
 use rppal::i2c::I2c;
+use std::{thread::sleep, time::Duration};
 
 fn main() {
     let mut i2c = I2c::new().unwrap();
@@ -15,7 +16,7 @@ fn main() {
     multi_led
         .set_sample_averaging(SampleAveraging::Sa4)
         .unwrap();
-    multi_led.set_pulse_amplitude(Led::All, 15).unwrap();
+    multi_led.set_pulse_amplitude(Led::All, 10).unwrap();
     multi_led.set_sampling_rate(SamplingRate::Sps200).unwrap();
     multi_led.set_pulse_width(LedPulseWidth::Pw411).unwrap();
     multi_led
@@ -42,6 +43,9 @@ fn main() {
     heart_hr.set_sampling_rate(SamplingRate::Sps200).unwrap();
     heart_hr.set_pulse_width(LedPulseWidth::Pw411).unwrap();
     heart_hr.enable_fifo_rollover().unwrap();
+    heart_hr.shutdown();
+    sleep(Duration::from_secs(2));
+    heart_hr.wake_up();
     samples_read = heart_hr.read_fifo(&mut data).unwrap();
     println!("Herat HR Sample read: {:?}", samples_read);
     heart_hr.destroy();
