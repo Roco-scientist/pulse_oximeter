@@ -27,6 +27,10 @@ fn main() {
             TimeSlot::Disabled,
         ])
         .unwrap();
+    multi_led.enable_alc_overflow_interrupt().unwrap();
+    multi_led.enable_fifo_almost_full_interrupt().unwrap();
+    multi_led.enable_temperature_ready_interrupt().unwrap();
+    multi_led.enable_new_fifo_data_ready_interrupt().unwrap();
     multi_led.enable_fifo_rollover().unwrap();
     let mut data = [0; 500];
     let interupt_status = multi_led.read_interrupt_status().unwrap();
