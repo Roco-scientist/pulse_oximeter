@@ -6,8 +6,8 @@ use rppal::i2c::I2c;
 
 fn main() {
     let mut i2c = I2c::new().unwrap();
-    let address = 0x57u16;
-    i2c.set_slave_address(address).unwrap();
+    // let address = 0x57u16;
+    // i2c.set_slave_address(address).unwrap();
     let mut max30102 = Max3010x::new_max30102(i2c);
     let mut multi_led = max30102.into_multi_led().unwrap();
     multi_led
@@ -23,7 +23,7 @@ fn main() {
         ])
         .unwrap();
     multi_led.enable_fifo_rollover().unwrap();
-    let mut data = [0; 10000];
+    let mut data = [0; 500];
     let mut samples_read = multi_led.read_fifo(&mut data).unwrap();
 
     println!("Sample read: {:?}", samples_read);

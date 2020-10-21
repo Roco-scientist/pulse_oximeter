@@ -1,5 +1,5 @@
 [package]
-name = "Pulse_Oximeter"
+name = "pulse_oximeter"
 version = "0.1.0"
 authors = ["Rory Coffey <coffeyrt@gmail.com>"]
 edition = "2018"
@@ -7,5 +7,5 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-max3010x = "0.1"
+max3010x = {path = "../max3010x-rs"} # {git = "https://github.com/Roco-scientist/max3010x-rs.git"} # "0.1"
 rppal = {version = "0.11", features = ["hal-unproven"]}
